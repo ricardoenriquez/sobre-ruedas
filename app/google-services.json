@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "819979567627",
+    "firebase_url": "https://sobreruedas-dfb23.firebaseio.com",
+    "project_id": "sobreruedas-dfb23",
+    "storage_bucket": "sobreruedas-dfb23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819979567627:android:9c49e35fc6254ca3",
+        "android_client_info": {
+          "package_name": "com.softandino.android.sobreruedas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819979567627-rit80kvl94gs12t8mn7ut3hgqsnbartb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYvP_0Y8tMTwUf4C3reQlWg3L4u2fw5pI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
