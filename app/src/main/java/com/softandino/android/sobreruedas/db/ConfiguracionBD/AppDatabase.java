@@ -53,6 +53,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             AppDatabase database = AppDatabase.getInstance(context);
                             database.beginTransaction();
                             database.rodadaDao().insert(new Rodada(1, "Bendicion Motera", "Rodada por buga todo el dia", "Ricardo Enriquez", "40.000", "1", "FM"));
+                            database.rodadaDao().insert(new Rodada(2, "Bendicion Motera2", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
                             database.endTransaction();
                         }
                     }).build();

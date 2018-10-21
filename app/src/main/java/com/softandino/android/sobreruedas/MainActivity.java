@@ -89,9 +89,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            cargarFragment(new MapsFragment());
-        } else if (id == R.id.nav_gallery) {
             cargarFragment(new RodadasFragment());
+        } else if (id == R.id.nav_gallery) {
+            cargarFragment(new MapsFragment());
         } else if (id == R.id.nav_slideshow) {
             cargarFragment(new ChatFragment());
         } else if (id == R.id.nav_manage) {

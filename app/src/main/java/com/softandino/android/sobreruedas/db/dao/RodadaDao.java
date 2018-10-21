@@ -8,6 +8,7 @@ import android.arch.persistence.room.Query;
 
 import com.softandino.android.sobreruedas.db.entity.Rodada;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao

@@ -4,11 +4,21 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.softandino.android.sobreruedas.R;
+import com.softandino.android.sobreruedas.adapter.RodadasAdapter;
+import com.softandino.android.sobreruedas.db.ConfiguracionBD.AppDatabase;
+import com.softandino.android.sobreruedas.db.entity.Rodada;
+import com.softandino.android.sobreruedas.dto.RodadaDTO;
+import com.softandino.android.sobreruedas.util.Cast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +39,9 @@ public class RodadasFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    RecyclerView recyckerRodada;
+    ArrayList<RodadaDTO> listaRodadas;
 
     public RodadasFragment() {
         // Required empty public constructor
@@ -65,7 +78,21 @@ public class RodadasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rodadas, container, false);
+        View vista = inflater.inflate(R.layout.fragment_rodadas, container, false);
+
+        listaRodadas = new ArrayList();
+        recyckerRodada = (RecyclerView) vista.findViewById(R.id.recyclerId);
+        recyckerRodada.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        //AppDatabase database = AppDatabase.getInstance(getContext());
+      //  listaRodadas = Cast.castListRodadaEntityToDTO(database.rodadaDao().cargarRodada());
+        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
+
+        RodadasAdapter adapter = new RodadasAdapter(listaRodadas);
+        recyckerRodada.setAdapter(adapter);
+
+
+        return vista;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
