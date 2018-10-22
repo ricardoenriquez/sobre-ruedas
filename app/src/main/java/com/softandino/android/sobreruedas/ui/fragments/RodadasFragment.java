@@ -1,6 +1,7 @@
 package com.softandino.android.sobreruedas.ui.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,13 +13,10 @@ import android.view.ViewGroup;
 
 import com.softandino.android.sobreruedas.R;
 import com.softandino.android.sobreruedas.adapter.RodadasAdapter;
-import com.softandino.android.sobreruedas.db.ConfiguracionBD.AppDatabase;
-import com.softandino.android.sobreruedas.db.entity.Rodada;
 import com.softandino.android.sobreruedas.dto.RodadaDTO;
-import com.softandino.android.sobreruedas.util.Cast;
+import com.softandino.android.sobreruedas.ui.DetalleRodadaActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,13 +83,29 @@ public class RodadasFragment extends Fragment {
         recyckerRodada.setLayoutManager(new LinearLayoutManager(getContext()));
 
         //AppDatabase database = AppDatabase.getInstance(getContext());
-      //  listaRodadas = Cast.castListRodadaEntityToDTO(database.rodadaDao().cargarRodada());
+        //listaRodadas = Cast.castListRodadaEntityToDTO(database.rodadaDao().cargarRodada().getValue());
+        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera", "Rodada por buga todo el dia", "Ricardo Enriquez2", "40.000", "1", "Alianza Regional"));
+        listaRodadas.add(new RodadaDTO(2, "Zipaquira", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
+        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
+        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
+        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
+        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
+        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
         listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
 
         RodadasAdapter adapter = new RodadasAdapter(listaRodadas);
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RodadaDTO rodadaSelected = listaRodadas.get(recyckerRodada.getChildAdapterPosition(v));
+
+               // Toast.makeText(getContext(), rodadaSelected.getDescripcion(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(),DetalleRodadaActivity.class);
+                intent.putExtra("detalle", rodadaSelected);
+                startActivity(intent);
+            }
+        });
         recyckerRodada.setAdapter(adapter);
-
-
         return vista;
     }
 

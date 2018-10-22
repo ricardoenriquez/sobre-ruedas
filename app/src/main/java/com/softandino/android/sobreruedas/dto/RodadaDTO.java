@@ -1,6 +1,9 @@
 package com.softandino.android.sobreruedas.dto;
 
-public class RodadaDTO {
+import java.io.Serializable;
+
+public class RodadaDTO implements Serializable {
+
     private Integer id;
     private String rodada;
     private String descripcion;

@@ -17,9 +17,10 @@ import java.util.ArrayList;
  * Created by CHENAO on 13/07/2017.
  */
 
-public class RodadasAdapter extends RecyclerView.Adapter<RodadasAdapter.RodadasViewHolder> {
+public class RodadasAdapter extends RecyclerView.Adapter<RodadasAdapter.RodadasViewHolder> implements View.OnClickListener {
 
     ArrayList<RodadaDTO> listaRodadas;
+    View.OnClickListener lister;
 
     public RodadasAdapter(ArrayList<RodadaDTO> listaPersonaje) {
         this.listaRodadas = listaPersonaje;
@@ -28,6 +29,7 @@ public class RodadasAdapter extends RecyclerView.Adapter<RodadasAdapter.RodadasV
     @Override
     public RodadasViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, null, false);
+        view.setOnClickListener(this);
         return new RodadasViewHolder(view);
     }
 
@@ -36,6 +38,7 @@ public class RodadasAdapter extends RecyclerView.Adapter<RodadasAdapter.RodadasV
     public void onBindViewHolder(RodadasViewHolder holder, int position) {
         holder.txtNombre.setText(listaRodadas.get(position).getRodada());
         holder.txtInformacion.setText(listaRodadas.get(position).getDescripcion());
+        holder.txtCosto.setText("$ " + listaRodadas.get(position).getCosto());
         //holder.foto.setImageResource(listaRodadas.get(position).getImagenId());
     }
 
@@ -44,14 +47,29 @@ public class RodadasAdapter extends RecyclerView.Adapter<RodadasAdapter.RodadasV
         return listaRodadas.size();
     }
 
+    public void setOnClickListener(View.OnClickListener listener) {
+        this.lister = listener;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (lister != null) {
+            lister.onClick(view);
+        }
+
+    }
+
     public class RodadasViewHolder extends RecyclerView.ViewHolder {
-        TextView txtNombre, txtInformacion;
+        TextView txtNombre;
+        TextView txtInformacion;
+        TextView txtCosto;
         ImageView foto;
 
         public RodadasViewHolder(View itemView) {
             super(itemView);
             txtNombre = (TextView) itemView.findViewById(R.id.idNombre);
             txtInformacion = (TextView) itemView.findViewById(R.id.idInfo);
+            txtCosto = (TextView) itemView.findViewById(R.id.costo);
             foto = (ImageView) itemView.findViewById(R.id.idImagen);
         }
     }

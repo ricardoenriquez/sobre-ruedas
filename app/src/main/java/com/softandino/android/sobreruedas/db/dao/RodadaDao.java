@@ -15,7 +15,7 @@ import java.util.List;
 public interface RodadaDao {
 
     @Query("SELECT * FROM MT_RODADA")
-    List<Rodada> cargarRodada();
+    LiveData<List<Rodada>> cargarRodada();
 
     @Query("SELECT * FROM MT_RODADA WHERE id = :idRodada")
     LiveData<Rodada> cargarRodadaPorId(long idRodada);
