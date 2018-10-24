@@ -10,4 +10,19 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_detalle_rodada">Detalle Rodada</string>
+
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_mail">Ingrese un email</string>
+    <string name="title_pss">Ingrese una contrasela</string>
+    <string name="title_registro">Registrar Usuario</string>
+    <string name="title_login">Iniciar Sesión</string>
+
+    <!-- LAYOUT PERFIL -->
+    <string name="perfil_correo">Correo</string>
+    <string name="perfil_club">Club</string>
+    <string name="perfil_nombre">nombre</string>
+
+
 </resources>

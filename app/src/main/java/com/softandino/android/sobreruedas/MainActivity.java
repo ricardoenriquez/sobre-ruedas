@@ -1,5 +1,6 @@
 package com.softandino.android.sobreruedas;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,7 +15,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.softandino.android.sobreruedas.ui.LoginActivity;
 import com.softandino.android.sobreruedas.ui.fragments.ChatFragment;
 import com.softandino.android.sobreruedas.ui.fragments.MapsFragment;
 import com.softandino.android.sobreruedas.ui.fragments.PerfilFragment;
@@ -24,11 +30,15 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, RodadasFragment.OnFragmentInteractionListener,
         MapsFragment.OnFragmentInteractionListener, ChatFragment.OnFragmentInteractionListener, PerfilFragment.OnFragmentInteractionListener {
 
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -48,6 +58,15 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() != null) {
+            firebaseUser = firebaseAuth.getCurrentUser();
+            Toast.makeText(this, "Bienvenid@ " + firebaseUser.getEmail(), Toast.LENGTH_LONG).show();
+        } else {
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+
     }
 
     @Override

@@ -1,14 +1,21 @@
 package com.softandino.android.sobreruedas.ui.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.softandino.android.sobreruedas.R;
+import com.softandino.android.sobreruedas.ui.LoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +36,10 @@ public class PerfilFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
+    private TextView tituloTV;
 
     public PerfilFragment() {
         // Required empty public constructor
@@ -58,6 +69,14 @@ public class PerfilFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+        firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() != null) {
+            firebaseUser = firebaseAuth.getCurrentUser();
+            tituloTV = getActivity().findViewById(R.id.tv_titulo);
+            tituloTV.setText(firebaseUser.getDisplayName());
+        } else {
+            startActivity(new Intent(getContext(), LoginActivity.class));
         }
     }
 

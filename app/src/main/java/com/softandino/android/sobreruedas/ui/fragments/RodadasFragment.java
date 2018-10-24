@@ -84,14 +84,14 @@ public class RodadasFragment extends Fragment {
 
         //AppDatabase database = AppDatabase.getInstance(getContext());
         //listaRodadas = Cast.castListRodadaEntityToDTO(database.rodadaDao().cargarRodada().getValue());
-        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera", "Rodada por buga todo el dia", "Ricardo Enriquez2", "40.000", "1", "Alianza Regional"));
-        listaRodadas.add(new RodadaDTO(2, "Zipaquira", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
-        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
-        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
-        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
-        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
-        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
-        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
+        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera", "Rodada por buwerwerwerwerga todo el dia", "Ricardo Enriquez2", "40.000", "1", "Alianza Regional"));
+        listaRodadas.add(new RodadaDTO(2, "Zipaquira", "Rodada por buga toertertertertertertertertertedo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
+        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada posdfsdfs werdfr buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
+        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por bugaw er todowerwerwerer el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
+        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buwer w sdfsdfsewerwdfsdfxcvxcvga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
+        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por w wer bugwerwerwera todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
+        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por bsfsdfsdfwuga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
+        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buga towefwe rew werwerdo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
 
         RodadasAdapter adapter = new RodadasAdapter(listaRodadas);
         adapter.setOnClickListener(new View.OnClickListener() {
