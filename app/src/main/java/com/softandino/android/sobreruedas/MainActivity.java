@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.softandino.android.sobreruedas.ui.CrearRodadaActivity;
 import com.softandino.android.sobreruedas.ui.LoginActivity;
 import com.softandino.android.sobreruedas.ui.fragments.ChatFragment;
 import com.softandino.android.sobreruedas.ui.fragments.MapsFragment;
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                startActivity(new Intent(getApplicationContext(), CrearRodadaActivity.class));
             }
         });
 

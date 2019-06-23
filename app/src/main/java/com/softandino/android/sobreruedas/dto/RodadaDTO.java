@@ -12,6 +12,10 @@ public class RodadaDTO implements Serializable {
     private String dias;
     private String club;
 
+
+
+    public RodadaDTO(){}
+
     public RodadaDTO(Integer id, String rodada, String descripcion, String encargado, String costo, String dias, String club) {
         this.id = id;
         this.rodada = rodada;

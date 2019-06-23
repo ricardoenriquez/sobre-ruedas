@@ -70,21 +70,22 @@ public class PerfilFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        firebaseAuth = FirebaseAuth.getInstance();
-        if (firebaseAuth.getCurrentUser() != null) {
-            firebaseUser = firebaseAuth.getCurrentUser();
-            tituloTV = getActivity().findViewById(R.id.tv_titulo);
-            tituloTV.setText(firebaseUser.getDisplayName());
-        } else {
-            startActivity(new Intent(getContext(), LoginActivity.class));
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perfil, container, false);
+        View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+        tituloTV =  view.findViewById(R.id.textView4);
+        firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() != null) {
+            firebaseUser = firebaseAuth.getCurrentUser();
+            tituloTV.setText(firebaseUser.getEmail());
+        } else {
+            startActivity(new Intent(getContext(), LoginActivity.class));
+        }
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

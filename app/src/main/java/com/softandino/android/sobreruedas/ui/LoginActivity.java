@@ -35,6 +35,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         firebaseAuth = FirebaseAuth.getInstance();
+
+        if (firebaseAuth.getCurrentUser() != null) {
+            entrarSesion();
+        }
         mailET = findViewById(R.id.et_mail);
         pssET = findViewById(R.id.et_pss);
         registroBtn = findViewById(R.id.btn_registro);
@@ -58,6 +62,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(LoginActivity.this, "Se ha registrado correctamente email " + mail, Toast.LENGTH_LONG).show();
+                    logearUsuario();
                 } else {
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                         Toast.makeText(LoginActivity.this, "El email ya se encuentra registrado", Toast.LENGTH_LONG).show();
@@ -96,8 +101,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(LoginActivity.this, "Bienvenido" + mail, Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplication(), MainActivity.class);
-                    startActivity(intent);
+                    entrarSesion();
                 } else {
                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                         Toast.makeText(LoginActivity.this, "Credenciales invalidas", Toast.LENGTH_LONG).show();
@@ -109,6 +113,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
+    }
+
+    private void entrarSesion() {
+        Intent intent = new Intent(getApplication(), MainActivity.class);
+        startActivity(intent);
     }
 
     @Override
