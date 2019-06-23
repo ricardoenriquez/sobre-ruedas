@@ -18,28 +18,37 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre"
-            android:id="@+id/etNombre"
+            android:hint="Rodada"
+            android:id="@+id/etRodada"
             android:layout_marginTop="40dp"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Apellido"
-            android:id="@+id/etApellido"/>
+            android:hint="Descripción"
+            android:id="@+id/etdescripcion"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Telefono"
-            android:id="@+id/etTelefono"
-            android:inputType="number"/>
+            android:hint="Encargado"
+            android:id="@+id/etEncargado"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Direccion"
-            android:id="@+id/etDireccion"/>
+            android:hint="Costo"
+            android:id="@+id/etCosto"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Dias"
+            android:id="@+id/etDias"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Club"
+            android:id="@+id/etClub"/>
 
         <Button
             android:layout_width="match_parent"

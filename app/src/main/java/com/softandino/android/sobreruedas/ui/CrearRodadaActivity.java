@@ -25,7 +25,12 @@ public class CrearRodadaActivity extends AppCompatActivity implements View.OnCli
 
     DatabaseReference mRootReference;
     Button mButtonSubirDatosFirebase;
-    EditText mEditTextDatoNombreUsuario,mEditTextDatoApellidoUsuario,mEditTextDatoTelefonoUsuario,mEditTextDatoDireccionUsuario;
+    EditText etRodada;
+    EditText etDescripcion;
+    EditText etEncargado;
+    EditText etCosto;
+    EditText etDias;
+    EditText etClub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +49,12 @@ public class CrearRodadaActivity extends AppCompatActivity implements View.OnCli
         });
         mButtonSubirDatosFirebase = findViewById(R.id.btnSubirDatos);
         mButtonSubirDatosFirebase.setOnClickListener(this);
-        mEditTextDatoNombreUsuario = findViewById(R.id.etNombre);
-        mEditTextDatoApellidoUsuario = findViewById(R.id.etApellido);
-        mEditTextDatoTelefonoUsuario = findViewById(R.id.etTelefono);
-        mEditTextDatoDireccionUsuario = findViewById(R.id.etDireccion);
+        etRodada = findViewById(R.id.etRodada);
+        etDescripcion = findViewById(R.id.etdescripcion);
+        etEncargado = findViewById(R.id.etEncargado);
+        etCosto = findViewById(R.id.etCosto);
+        etDias = findViewById(R.id.etDias);
+        etClub = findViewById(R.id.etClub);
 
         mRootReference = FirebaseDatabase.getInstance().getReference();
 
@@ -57,27 +64,29 @@ public class CrearRodadaActivity extends AppCompatActivity implements View.OnCli
 
     }
     private void solicitarDatosFirebase() {
-        mRootReference.child("Usuario").addValueEventListener(new ValueEventListener() {
+        mRootReference.child("Rodada").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for(final DataSnapshot snapshot : dataSnapshot.getChildren()){
 
-                    mRootReference.child("Usuario").child(snapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                    mRootReference.child("Rodada").child(snapshot.getKey()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            RodadaDTO rodada = snapshot.getValue(RodadaDTO.class);
-                            String nombre = rodada.getRodada();
-                            String descripcion = rodada.getDescripcion();
-                            String costo = rodada.getCosto();
-                            String encargado = rodada.getEncargado();
-                            String dias = rodada.getDias();
+                            RodadaDTO rodadaDTO = snapshot.getValue(RodadaDTO.class);
+                            String rodada = rodadaDTO.getRodada();
+                            String descripcion = rodadaDTO.getDescripcion();
+                            String costo = rodadaDTO.getCosto();
+                            String encargado = rodadaDTO.getEncargado();
+                            String dias = rodadaDTO.getDias();
+                            String club = rodadaDTO.getDias();
 
-                            Log.e("Nombre:",""+nombre);
+                            Log.e("rodada:",""+rodada);
                             Log.e("descripcion:",""+descripcion);
                             Log.e("costo:",""+costo);
                             Log.e("encargado:",""+encargado);
                             Log.e("dias:",""+dias);
+                            Log.e("club:",""+club);
                             Log.e("Datos:",""+snapshot.getValue());
                         }
 
@@ -99,15 +108,17 @@ public class CrearRodadaActivity extends AppCompatActivity implements View.OnCli
             }
         });
     }
-    private void cargarDatosFirebase(String nombre, String apellido, int telefono, String direccion) {
+    private void cargarDatosFirebase(String rodada, String descripcion, String encargado, String costo, String dias, String club) {
 
-        Map<String, Object> datosUsuario = new HashMap<>();
-        datosUsuario.put("nombre", nombre);
-        datosUsuario.put("apellido", apellido);
-        datosUsuario.put("telefono", telefono);
-        datosUsuario.put("direccion", direccion);
+        Map<String, Object> datosRodada = new HashMap<>();
+        datosRodada.put("rodada", rodada);
+        datosRodada.put("descripcion", descripcion);
+        datosRodada.put("encargado", encargado);
+        datosRodada.put("costo", costo);
+        datosRodada.put("dias", dias);
+        datosRodada.put("club", club);
 
-        mRootReference.child("Usuario").push().setValue(datosUsuario);
+        mRootReference.child("Rodada").push().setValue(datosRodada);
     }
 
     @Override
@@ -117,11 +128,13 @@ public class CrearRodadaActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.btnSubirDatos:
 
-                String nombre = mEditTextDatoNombreUsuario.getText().toString();
-                String apellido = mEditTextDatoApellidoUsuario.getText().toString();
-                int telefono = Integer.parseInt(mEditTextDatoTelefonoUsuario.getText().toString());
-                String direccion = mEditTextDatoDireccionUsuario.getText().toString();
-                cargarDatosFirebase(nombre, apellido, telefono, direccion);
+                String rodada = etRodada.getText().toString();
+                String descripcion= etDescripcion.getText().toString();
+                String encargado = etEncargado.getText().toString();
+                String costo = etCosto.getText().toString();
+                String dias = etDias.getText().toString();
+                String club = etClub.getText().toString();
+                cargarDatosFirebase(rodada, descripcion, encargado, costo,dias,club);
                 break;
         }
 
