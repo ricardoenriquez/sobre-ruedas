@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.softandino.android.sobreruedas.R;
 import com.softandino.android.sobreruedas.dto.RodadaDTO;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,7 +64,9 @@ public class CrearRodadaActivity extends AppCompatActivity implements View.OnCli
 
 
     }
+
     private void solicitarDatosFirebase() {
+        final ArrayList<RodadaDTO> rodadas = new ArrayList<>();
         mRootReference.child("Rodada").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -75,7 +78,7 @@ public class CrearRodadaActivity extends AppCompatActivity implements View.OnCli
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             RodadaDTO rodadaDTO = snapshot.getValue(RodadaDTO.class);
                             String rodada = rodadaDTO.getRodada();
-                            String descripcion = rodadaDTO.getDescripcion();
+                            /*String descripcion = rodadaDTO.getDescripcion();
                             String costo = rodadaDTO.getCosto();
                             String encargado = rodadaDTO.getEncargado();
                             String dias = rodadaDTO.getDias();
@@ -87,7 +90,10 @@ public class CrearRodadaActivity extends AppCompatActivity implements View.OnCli
                             Log.e("encargado:",""+encargado);
                             Log.e("dias:",""+dias);
                             Log.e("club:",""+club);
-                            Log.e("Datos:",""+snapshot.getValue());
+                            Log.e("Datos:",""+snapshot.getValue());*/
+
+                            Log.e("rodada:",""+rodada);
+                            rodadas.add(rodadaDTO);
                         }
 
                         @Override
@@ -107,7 +113,11 @@ public class CrearRodadaActivity extends AppCompatActivity implements View.OnCli
 
             }
         });
+        for (RodadaDTO rodada: rodadas ) {
+            Log.e("rodada -> :",""+rodada.getRodada());
+        }
     }
+
     private void cargarDatosFirebase(String rodada, String descripcion, String encargado, String costo, String dias, String club) {
 
         Map<String, Object> datosRodada = new HashMap<>();

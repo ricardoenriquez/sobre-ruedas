@@ -7,13 +7,21 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.softandino.android.sobreruedas.MainActivity;
 import com.softandino.android.sobreruedas.R;
 import com.softandino.android.sobreruedas.adapter.RodadasAdapter;
 import com.softandino.android.sobreruedas.dto.RodadaDTO;
+import com.softandino.android.sobreruedas.singleton.RodadaSingleton;
 import com.softandino.android.sobreruedas.ui.DetalleRodadaActivity;
 
 import java.util.ArrayList;
@@ -78,20 +86,14 @@ public class RodadasFragment extends Fragment {
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.fragment_rodadas, container, false);
 
-        listaRodadas = new ArrayList();
+        listaRodadas = MainActivity.rodadas;
         recyckerRodada = (RecyclerView) vista.findViewById(R.id.recyclerId);
         recyckerRodada.setLayoutManager(new LinearLayoutManager(getContext()));
 
         //AppDatabase database = AppDatabase.getInstance(getContext());
         //listaRodadas = Cast.castListRodadaEntityToDTO(database.rodadaDao().cargarRodada().getValue());
-        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera", "Rodada por buwerwerwerwerga todo el dia", "Ricardo Enriquez2", "40.000", "1", "Alianza Regional"));
-        listaRodadas.add(new RodadaDTO(2, "Zipaquira", "Rodada por buga toertertertertertertertertertedo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
-        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada posdfsdfs werdfr buga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
-        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por bugaw er todowerwerwerer el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
-        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buwer w sdfsdfsewerwdfsdfxcvxcvga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
-        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por w wer bugwerwerwera todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
-        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por bsfsdfsdfwuga todo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
-        listaRodadas.add(new RodadaDTO(2, "Bendicion Motera2", "Rodada por buga towefwe rew werwerdo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
+        //listaRodadas.add(new RodadaDTO(2, "Bendicion Motera", "Rodada por buwerwerwerwerga todo el dia", "Ricardo Enriquez2", "40.000", "1", "Alianza Regional"));
+        //listaRodadas.add(new RodadaDTO(2, "Zipaquira", "Rodada por buga toertertertertertertertertertedo el dia2", "Ricardo Enriquez2", "40.000", "1", "FM"));
 
         RodadasAdapter adapter = new RodadasAdapter(listaRodadas);
         adapter.setOnClickListener(new View.OnClickListener() {

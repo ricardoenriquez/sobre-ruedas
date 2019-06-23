@@ -38,6 +38,8 @@ public class RodadasAdapter extends RecyclerView.Adapter<RodadasAdapter.RodadasV
     public void onBindViewHolder(RodadasViewHolder holder, int position) {
         holder.txtNombre.setText(listaRodadas.get(position).getRodada());
         holder.txtInformacion.setText(listaRodadas.get(position).getDescripcion());
+        //holder.txtFecha.setText(listaRodadas.get(position).getDias());
+        //holder.txtEncargado.setText(listaRodadas.get(position).getEncargado());
         holder.txtCosto.setText("$ " + listaRodadas.get(position).getCosto());
         //holder.foto.setImageResource(listaRodadas.get(position).getImagenId());
     }
@@ -63,6 +65,8 @@ public class RodadasAdapter extends RecyclerView.Adapter<RodadasAdapter.RodadasV
         TextView txtNombre;
         TextView txtInformacion;
         TextView txtCosto;
+        TextView txtFecha;
+        TextView txtEncargado;
         ImageView foto;
 
         public RodadasViewHolder(View itemView) {
@@ -70,6 +74,8 @@ public class RodadasAdapter extends RecyclerView.Adapter<RodadasAdapter.RodadasV
             txtNombre = (TextView) itemView.findViewById(R.id.idNombre);
             txtInformacion = (TextView) itemView.findViewById(R.id.idInfo);
             txtCosto = (TextView) itemView.findViewById(R.id.costo);
+            txtFecha = (TextView) itemView.findViewById(R.id.fecha);
+            txtEncargado = (TextView) itemView.findViewById(R.id.encargado);
             foto = (ImageView) itemView.findViewById(R.id.idImagen);
         }
     }

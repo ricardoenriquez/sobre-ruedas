@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +21,13 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.softandino.android.sobreruedas.dto.RodadaDTO;
+import com.softandino.android.sobreruedas.singleton.RodadaSingleton;
 import com.softandino.android.sobreruedas.ui.CrearRodadaActivity;
 import com.softandino.android.sobreruedas.ui.LoginActivity;
 import com.softandino.android.sobreruedas.ui.fragments.ChatFragment;
@@ -27,12 +35,16 @@ import com.softandino.android.sobreruedas.ui.fragments.MapsFragment;
 import com.softandino.android.sobreruedas.ui.fragments.PerfilFragment;
 import com.softandino.android.sobreruedas.ui.fragments.RodadasFragment;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, RodadasFragment.OnFragmentInteractionListener,
         MapsFragment.OnFragmentInteractionListener, ChatFragment.OnFragmentInteractionListener, PerfilFragment.OnFragmentInteractionListener {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
+    DatabaseReference mRootReference;
+    public static ArrayList<RodadaDTO> rodadas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +78,9 @@ public class MainActivity extends AppCompatActivity
         if (firebaseAuth.getCurrentUser() != null) {
             firebaseUser = firebaseAuth.getCurrentUser();
             Toast.makeText(this, "Bienvenid@ " + firebaseUser.getEmail(), Toast.LENGTH_LONG).show();
+            mRootReference = FirebaseDatabase.getInstance().getReference();
+            rodadas = new ArrayList<>();
+            solicitarDatosFirebase();
         } else {
             startActivity(new Intent(this, LoginActivity.class));
         }
@@ -80,6 +95,37 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void solicitarDatosFirebase() {
+        mRootReference.child("Rodada").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for(final DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    mRootReference.child("Rodada").child(snapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            RodadaDTO rodadaDTO = snapshot.getValue(RodadaDTO.class);
+                            String rodada = rodadaDTO.getRodada();
+                            Log.e("rodada:",""+rodada);
+                            rodadas.add(rodadaDTO);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

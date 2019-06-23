@@ -76,26 +76,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    private void validarCampos(String mail, String pss) {
-        if (TextUtils.isEmpty(mail)) {
+    private boolean validarCampos(String mail, String pss) {
+        if (null!=mail && !mail.trim().isEmpty()) {
             Toast.makeText(this, "Se debe ingrtesar un email", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
-        if (TextUtils.isEmpty(pss)) {
+        if (null!=pss && !pss.trim().isEmpty()) {
             Toast.makeText(this, "Se debe ingrtesar una contraseña", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
+        return true;
     }
 
 
     private void logearUsuario() {
         final String mail = mailET.getText().toString().trim();
         String pss = pssET.getText().toString().trim();
-        validarCampos(mail, pss);
+        if (validarCampos(mail, pss)){
+            peticionFireBaseLogIn(mail, pss);
+        }
+    }
+
+    private void peticionFireBaseLogIn(final String mail, String pss) {
+        //loguear usuario
         progressDialog.setMessage("Realizando consulta en linea");
         progressDialog.show();
-
-        //loguear usuario
         firebaseAuth.signInWithEmailAndPassword(mail, pss).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -112,7 +117,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 progressDialog.dismiss();
             }
         });
-
     }
 
     private void entrarSesion() {

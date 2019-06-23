@@ -14,6 +14,8 @@ public class DetalleRodadaActivity extends AppCompatActivity {
     private TextView club;
     private TextView valor;
     private TextView descripcion;
+    private TextView fecha;
+    private TextView encargado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +31,14 @@ public class DetalleRodadaActivity extends AppCompatActivity {
         club = (TextView) findViewById(R.id.club);
         descripcion = (TextView) findViewById(R.id.descripcion);
         valor = (TextView) findViewById(R.id.costo);
+        //fecha = (TextView) findViewById(R.id.fecha);
+        //encargado = (TextView) findViewById(R.id.encargado);
 
         club.setText("Organizada Por : " + rodada.getClub());
         valor.setText(rodada.getCosto());
         descripcion.setText(rodada.getDescripcion());
+        //fecha.setText(rodada.getDias());
+        //encargado.setText(rodada.getEncargado());
     }
 
 }
